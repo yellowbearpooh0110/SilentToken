@@ -5,4 +5,5 @@ export type Config = {
   networkId: number
 
   silentTokenAddress: string
+  massTransfer: Array<string>
 }

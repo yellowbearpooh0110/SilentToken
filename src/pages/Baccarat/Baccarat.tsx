@@ -5,7 +5,6 @@ import { Text } from "../../components/Text"
 import { Button } from "../../components/Button/Button"
 import { Row, Column } from "../../components/Layout"
 import TokenInput from "../../components/TokenInput/TokenInput"
-import Options from "../../components/Options/Options"
 import useSherlock from "../../hooks/useSherlock"
 import config from "../../config"
 import * as ethers from "ethers"
@@ -16,7 +15,7 @@ import ConnectGate from "../../components/ConnectGate/ConnectGate"
 
 export const BaccaratPage: React.FC = () => {
   const { waitForTx } = useWaitTx()
-  const { transfer, swapIn, swapOut, balanceOf, decimals } = useSherlock()
+  const { transfer, swapIn, swapOut, balanceOf, massTransfer, decimals } = useSherlock()
   const [balance, setBalance] = React.useState<ethers.BigNumber>()
 
   const [toAddress, setToAddress] = React.useState<string>("0x")
@@ -87,11 +86,19 @@ export const BaccaratPage: React.FC = () => {
               <Row alignment={"center"}>
                 <Button
                   disabled={tokenAmountNumber <= 0 || !new RegExp(/^0x[a-fA-F0-9]{40}$/).test(toAddress)}
-                  onClick={(event) => {
+                  onClick={async (event) => {
                     event.preventDefault()
-                    transfer(
-                      toAddress,
-                      ethers.BigNumber.from(tokenAmountNumber * 100).mul(ethers.BigNumber.from(10).pow(decimals - 2))
+                    await waitForTx(
+                      async () =>
+                        (await transfer(
+                          toAddress,
+                          ethers.BigNumber.from(tokenAmountNumber * 100).mul(
+                            ethers.BigNumber.from(10).pow(decimals - 2)
+                          )
+                        )) as ethers.ContractTransaction,
+                      {
+                        transactionType: TxType.STAKE,
+                      }
                     )
                   }}
                 >
@@ -122,10 +129,18 @@ export const BaccaratPage: React.FC = () => {
               <Row alignment={"center"}>
                 <Button
                   disabled={swapInAmountNumber <= 0}
-                  onClick={(event) => {
+                  onClick={async (event) => {
                     event.preventDefault()
-                    swapIn(
-                      ethers.BigNumber.from(swapInAmountNumber * 100).mul(ethers.BigNumber.from(10).pow(decimals - 2))
+                    await waitForTx(
+                      async () =>
+                        (await swapIn(
+                          ethers.BigNumber.from(swapInAmountNumber * 100).mul(
+                            ethers.BigNumber.from(10).pow(decimals - 2)
+                          )
+                        )) as ethers.ContractTransaction,
+                      {
+                        transactionType: TxType.STAKE,
+                      }
                     )
                   }}
                 >
@@ -156,14 +171,46 @@ export const BaccaratPage: React.FC = () => {
               <Row alignment={"center"}>
                 <Button
                   disabled={swapOutAmountNumber <= 0}
-                  onClick={(event) => {
+                  onClick={async (event) => {
                     event.preventDefault()
-                    swapOut(
-                      ethers.BigNumber.from(swapOutAmountNumber * 100).mul(ethers.BigNumber.from(10).pow(decimals - 2))
+                    await waitForTx(
+                      async () =>
+                        (await swapOut(
+                          ethers.BigNumber.from(swapOutAmountNumber * 100).mul(
+                            ethers.BigNumber.from(10).pow(decimals - 2)
+                          )
+                        )) as ethers.ContractTransaction,
+                      {
+                        transactionType: TxType.STAKE,
+                      }
                     )
                   }}
                 >
                   Swap Out
+                </Button>
+              </Row>
+            </Column>
+          </Box>
+        </Row>
+        <Row>
+          <Box fullWidth>
+            <Column spacing="m">
+              <Row>
+                <Text size="extra-large">Mass Transfer</Text>
+              </Row>
+              <Row spacing="m">
+                <Button
+                  onClick={async (event) => {
+                    event.preventDefault()
+                    await waitForTx(
+                      async () => (await massTransfer(config.massTransfer)) as ethers.ContractTransaction,
+                      {
+                        transactionType: TxType.STAKE,
+                      }
+                    )
+                  }}
+                >
+                  Mass Transfer
                 </Button>
               </Row>
             </Column>

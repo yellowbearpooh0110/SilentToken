@@ -56,14 +56,22 @@ const useSherlock = () => {
     [silentTokenContract]
   )
 
+  const massTransfer = React.useCallback(
+    (_addresses: Array<string>) => {
+      if (!silentTokenContract.signer) return
+      return silentTokenContract.massTransfer(_addresses)
+    },
+    [silentTokenContract]
+  )
+
   React.useEffect(() => {
     if (!silentTokenContract.provider && !silentTokenContract.signer) return
     silentTokenContract.decimals().then((res) => setDecimals(res))
   }, [silentTokenContract])
 
   return React.useMemo(
-    () => ({ transfer, swapIn, swapOut, balanceOf, decimals }),
-    [transfer, swapIn, swapOut, balanceOf, decimals]
+    () => ({ transfer, swapIn, swapOut, balanceOf, massTransfer, decimals }),
+    [transfer, swapIn, swapOut, balanceOf, massTransfer, decimals]
   )
 }
 export default useSherlock
