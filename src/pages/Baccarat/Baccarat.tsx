@@ -121,6 +121,7 @@ export const BaccaratPage: React.FC = () => {
               </Row>
               <Row alignment={"center"}>
                 <Button
+                  disabled={swapInAmountNumber <= 0}
                   onClick={(event) => {
                     event.preventDefault()
                     swapIn(
@@ -154,6 +155,7 @@ export const BaccaratPage: React.FC = () => {
               </Row>
               <Row alignment={"center"}>
                 <Button
+                  disabled={swapOutAmountNumber <= 0}
                   onClick={(event) => {
                     event.preventDefault()
                     swapOut(
