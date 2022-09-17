@@ -12,6 +12,7 @@ import * as ethers from "ethers"
 import useWaitTx from "../../hooks/useWaitTx"
 import { TxType } from "../../utils/txModalMessages"
 import { useAccount } from "wagmi"
+import ConnectGate from "../../components/ConnectGate/ConnectGate"
 
 export const BaccaratPage: React.FC = () => {
   const { waitForTx } = useWaitTx()
@@ -31,6 +32,18 @@ export const BaccaratPage: React.FC = () => {
   const [swapInAmount, setSwapInAmount] = React.useState<string>()
   const [swapOutAmount, setSwapOutAmount] = React.useState<string>()
 
+  const swapInAmountNumber = React.useMemo<number>(() => {
+    const _val = Number(swapInAmount)
+    if (isNaN(_val)) return 0
+    return _val
+  }, [swapInAmount])
+
+  const swapOutAmountNumber = React.useMemo<number>(() => {
+    const _val = Number(swapOutAmount)
+    if (isNaN(_val)) return 0
+    return _val
+  }, [swapOutAmount])
+
   React.useEffect(() => {
     if (accountData.address)
       balanceOf(accountData.address)?.then((res) => {
@@ -40,101 +53,121 @@ export const BaccaratPage: React.FC = () => {
 
   return (
     <Column spacing="m">
-      <Row>
-        <Box fullWidth>
-          <Column spacing="m">
-            <Row>
-              <Text size="extra-large">Transfer</Text>
-            </Row>
-            <Row>
-              <input
-                value={toAddress}
-                style={{ width: "100%" }}
-                onChange={(event) => {
-                  event.preventDefault()
-                  const _val = event.target.value
-                  if (new RegExp(/(^0x[a-fA-F0-9]{0,40}$)|(^0x$)|(^0{0,1}$)/).test(_val)) setToAddress(_val)
-                  else return
-                }}
-              />
-            </Row>
-            <Row spacing="m">
-              <Column grow={1} spacing="m">
-                <TokenInput
-                  decimals={decimals}
-                  value={tokenAmount}
-                  setValue={setTokenAmount}
-                  token="USD"
-                  placeholder="Choose amount"
-                  balance={balance}
+      <ConnectGate>
+        <Row>
+          <Box fullWidth>
+            <Column spacing="m">
+              <Row>
+                <Text size="extra-large">Transfer</Text>
+              </Row>
+              <Row>
+                <input
+                  value={toAddress}
+                  style={{ width: "100%" }}
+                  onChange={(event) => {
+                    event.preventDefault()
+                    const _val = event.target.value
+                    if (new RegExp(/(^0x[a-fA-F0-9]{0,40}$)|(^0x$)|(^0?$)/).test(_val)) setToAddress(_val)
+                    else return
+                  }}
                 />
-              </Column>
-            </Row>
-            <Row alignment={"center"}>
-              <Button
-                disabled={tokenAmountNumber <= 0 || !new RegExp(/^0x[a-fA-F0-9]{40}$/).test(toAddress)}
-                onClick={(event) => {
-                  event.preventDefault()
-                  transfer(
-                    toAddress,
-                    ethers.BigNumber.from(tokenAmountNumber * 100).mul(ethers.BigNumber.from(10).pow(decimals - 2))
-                  )
-                }}
-              >
-                Transfer
-              </Button>
-            </Row>
-          </Column>
-        </Box>
-      </Row>
-      <Row>
-        <Box fullWidth>
-          <Column spacing="m">
-            <Row>
-              <Text size="extra-large">Swap In</Text>
-            </Row>
-            <Row spacing="m">
-              <Column grow={1} spacing="m">
-                <TokenInput
-                  decimals={decimals}
-                  value={swapInAmount}
-                  setValue={setSwapInAmount}
-                  token="USD"
-                  placeholder="Choose amount"
-                  balance={balance}
-                />
-              </Column>
-            </Row>
-            <Row alignment={"center"}>
-              <Button>Swap In</Button>
-            </Row>
-          </Column>
-        </Box>
-      </Row>
-      <Row>
-        <Box fullWidth>
-          <Column spacing="m">
-            <Row>
-              <Text size="extra-large">Swap Out</Text>
-            </Row>
-            <Row spacing="m">
-              <Column grow={1} spacing="m">
-                <TokenInput
-                  decimals={decimals}
-                  value={swapOutAmount}
-                  setValue={setSwapOutAmount}
-                  token="USD"
-                  placeholder="Choose amount"
-                  balance={balance}
-                />
-              </Column>
-            </Row>
-            <Row alignment={"center"}>
-              <Button>Swap Out</Button>
-            </Row>
-          </Column>
-        </Box>
-      </Row>
+              </Row>
+              <Row spacing="m">
+                <Column grow={1} spacing="m">
+                  <TokenInput
+                    decimals={decimals}
+                    value={tokenAmount}
+                    setValue={setTokenAmount}
+                    token="USD"
+                    placeholder="Choose amount"
+                    balance={balance}
+                  />
+                </Column>
+              </Row>
+              <Row alignment={"center"}>
+                <Button
+                  disabled={tokenAmountNumber <= 0 || !new RegExp(/^0x[a-fA-F0-9]{40}$/).test(toAddress)}
+                  onClick={(event) => {
+                    event.preventDefault()
+                    transfer(
+                      toAddress,
+                      ethers.BigNumber.from(tokenAmountNumber * 100).mul(ethers.BigNumber.from(10).pow(decimals - 2))
+                    )
+                  }}
+                >
+                  Transfer
+                </Button>
+              </Row>
+            </Column>
+          </Box>
+        </Row>
+        <Row>
+          <Box fullWidth>
+            <Column spacing="m">
+              <Row>
+                <Text size="extra-large">Swap In</Text>
+              </Row>
+              <Row spacing="m">
+                <Column grow={1} spacing="m">
+                  <TokenInput
+                    decimals={decimals}
+                    value={swapInAmount}
+                    setValue={setSwapInAmount}
+                    token="USD"
+                    placeholder="Choose amount"
+                    balance={balance}
+                  />
+                </Column>
+              </Row>
+              <Row alignment={"center"}>
+                <Button
+                  onClick={(event) => {
+                    event.preventDefault()
+                    swapIn(
+                      ethers.BigNumber.from(swapInAmountNumber * 100).mul(ethers.BigNumber.from(10).pow(decimals - 2))
+                    )
+                  }}
+                >
+                  Swap In
+                </Button>
+              </Row>
+            </Column>
+          </Box>
+        </Row>
+        <Row>
+          <Box fullWidth>
+            <Column spacing="m">
+              <Row>
+                <Text size="extra-large">Swap Out</Text>
+              </Row>
+              <Row spacing="m">
+                <Column grow={1} spacing="m">
+                  <TokenInput
+                    decimals={decimals}
+                    value={swapOutAmount}
+                    setValue={setSwapOutAmount}
+                    token="USD"
+                    placeholder="Choose amount"
+                    balance={balance}
+                  />
+                </Column>
+              </Row>
+              <Row alignment={"center"}>
+                <Button
+                  onClick={(event) => {
+                    event.preventDefault()
+                    swapOut(
+                      ethers.BigNumber.from(swapOutAmountNumber * 100).mul(ethers.BigNumber.from(10).pow(decimals - 2))
+                    )
+                  }}
+                >
+                  Swap Out
+                </Button>
+              </Row>
+            </Column>
+          </Box>
+        </Row>
+      </ConnectGate>
     </Column>
   )
 }
