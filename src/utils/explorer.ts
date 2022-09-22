@@ -10,6 +10,9 @@ export const getTxUrl = (hash: string) => {
     case 1:
       // Mainnet
       return `https://etherscan.io/tx/${hash}`
+    case 4:
+      // Rinkeby
+      return `https://rinkeby.etherscan.io/tx/${hash}`
     case 5:
       // Goerli
       return `https://goerli.etherscan.io/tx/${hash}`

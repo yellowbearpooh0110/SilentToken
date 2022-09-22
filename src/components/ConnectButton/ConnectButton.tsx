@@ -3,7 +3,6 @@ import { useAccount, useNetwork, useSwitchNetwork } from "wagmi"
 import config from "../../config"
 import { shortenAddress } from "../../utils/format"
 import { setUser } from "../../utils/sentry"
-import { Button } from "../Button/Button"
 import WalletProviderModal from "../WalletProviderModal/WalletProviderModal"
 
 /**
@@ -43,9 +42,12 @@ const ConnectButton: React.FC<PropsWithChildren<unknown>> = ({ children }) => {
   if (!accountData.isConnected) {
     return (
       <>
-        <Button onClick={handleToggleConnectionModal} variant="cta">
+        <button
+          className="bg-[#add8e6] hover:bg-[#729eaf] border text-black my-[10px] min-w-[120px] rounded-[7px] h-[50px] disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed transition-all"
+          onClick={handleToggleConnectionModal}
+        >
           Connect
-        </Button>
+        </button>
         {isModalVisible && <WalletProviderModal onClose={handleToggleConnectionModal} />}
       </>
     )
@@ -55,12 +57,19 @@ const ConnectButton: React.FC<PropsWithChildren<unknown>> = ({ children }) => {
   const isCorrectNetwork = chain?.id === config.networkId
   if (!isCorrectNetwork) {
     return (
-      <Button variant="cta" onClick={handleSwitchToCorrectNetwork}>
+      <button
+        className="bg-[#add8e6] hover:bg-[#729eaf] border text-black my-[10px] min-w-[120px] rounded-[7px] h-[50px] disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed transition-all"
+        onClick={handleSwitchToCorrectNetwork}
+      >
         Switch network
-      </Button>
+      </button>
     )
   }
-  return <Button variant="cta">{shortenAddress(accountData.address)}</Button>
+  return (
+    <button className="bg-[#add8e6] hover:bg-[#729eaf] border text-black my-[10px] min-w-[120px] rounded-[7px] h-[50px] disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed transition-all">
+      {shortenAddress(accountData.address)}
+    </button>
+  )
 }
 
 export default ConnectButton

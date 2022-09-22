@@ -1,39 +1,14 @@
 import { BigNumber, ethers } from "ethers"
-import React, { PropsWithChildren } from "react"
+import React from "react"
 import useERC20 from "../../hooks/useERC20"
 import useWaitTx from "../../hooks/useWaitTx"
 import { TxType } from "../../utils/txModalMessages"
-import { Button } from "../Button/Button"
-import styles from "./AllowanceGate.module.scss"
-import cx from "classnames"
 
-interface Props {
-  /**
-   * Spender's address
-   */
+interface Props
+  extends Omit<React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, "onClick"> {
   spender: string
-
-  /**
-   * Required amount to spend
-   */
   amount?: BigNumber
-
-  /**
-   * Name of the action that takes place
-   * after the approval.
-   *
-   * E.g.: Add Balance / Stake
-   */
-  actionName?: string
-
-  /**
-   * On Click event handler
-   */
-  action: () => Promise<void>
-
-  /**
-   * On Succes event handler
-   */
+  onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => Promise<void>
   onSuccess?: () => void
 }
 
@@ -41,14 +16,7 @@ interface Props {
  * HOC for requesting the approval for spending a token
  * before another action
  */
-const AllowanceGate: React.FC<PropsWithChildren<Props>> = ({
-  children,
-  spender,
-  amount,
-  actionName,
-  action,
-  onSuccess,
-}) => {
+const AllowanceGate: React.FC<Props> = ({ className, spender, amount, disabled, onSuccess, onClick, ...restProps }) => {
   const [allowance, setAllowance] = React.useState<BigNumber>()
   const [isSuccess, setIsSuccess] = React.useState(false)
 
@@ -88,16 +56,16 @@ const AllowanceGate: React.FC<PropsWithChildren<Props>> = ({
   /**
    * Execute action and send success notification
    */
-  const handleOnAction = React.useCallback(async () => {
-    await action()
-
-    setIsSuccess(true)
-
-    onSuccess?.()
-
-    // Refetch allowance since it changed
-    handleFetchAllowance(true)
-  }, [action, onSuccess, handleFetchAllowance])
+  const handleOnAction = React.useCallback(
+    async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      await onClick(event)
+      setIsSuccess(true)
+      onSuccess?.()
+      // Refetch allowance since it changed
+      handleFetchAllowance(true)
+    },
+    [onClick, onSuccess, handleFetchAllowance]
+  )
 
   /**
    * Fetch allowance on initialization
@@ -117,27 +85,16 @@ const AllowanceGate: React.FC<PropsWithChildren<Props>> = ({
   const hasEnoughAllowance = (amount && allowance && amount.lte(allowance)) ?? false
 
   return hasEnoughAllowance ? (
-    <Button
-      disabled={!hasEnoughAllowance || isSuccess}
-      className={cx(styles.button, styles.actionButton, {
-        [styles.disabled]: !hasEnoughAllowance || isSuccess,
-        [styles.success]: isSuccess,
-      })}
+    <button
+      disabled={!hasEnoughAllowance || isSuccess || disabled}
+      className={className}
       onClick={handleOnAction}
-    >
-      {actionName}
-    </Button>
+      {...restProps}
+    />
   ) : (
-    <Button
-      className={cx(styles.button, styles.approveButton, {
-        [styles.success]: hasEnoughAllowance || isSuccess,
-        [styles.disabled]: hasEnoughAllowance || isSuccess,
-      })}
-      onClick={handleOnApprove}
-      disabled={hasEnoughAllowance}
-    >
+    <button className={className} onClick={handleOnApprove} disabled={hasEnoughAllowance || disabled}>
       Approve
-    </Button>
+    </button>
   )
 }
 

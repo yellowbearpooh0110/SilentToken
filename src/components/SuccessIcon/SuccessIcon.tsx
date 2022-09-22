@@ -1,13 +1,12 @@
 import React from "react"
-import styles from "./SuccessIcon.module.scss"
 import { FaCheck } from "react-icons/fa"
 
 function SuccessIcon() {
   return (
-    <div className={styles.container}>
-      <div className={styles.square}>
-        <div className={styles.iconContainer}>
-          <FaCheck size={60} />
+    <div className="flex items-center justify-center">
+      <div className="h-[100px] w-[100px] border-2 border-green-500 rotate-45">
+        <div className="-rotate-45 absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2">
+          <FaCheck className="text-green-500" size={60} />
         </div>
       </div>
     </div>

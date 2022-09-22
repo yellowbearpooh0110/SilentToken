@@ -14,12 +14,12 @@ interface Props {
 
 const TxHash: React.FC<Props> = ({ hash }) => {
   return (
-    <Text size="small" className={styles.caption}>
+    <p className="text-sm">
       Transaction hash:{" "}
-      <a href={getTxUrl(hash)} target="_blank" rel="noreferrer" className={styles.link}>
-        {shortenAddress(hash)} <FiExternalLink />
+      <a href={getTxUrl(hash)} target="_blank" rel="noreferrer" className="hover:text-green-300 transition-all">
+        {shortenAddress(hash)} <FiExternalLink className="inline" />
       </a>
-    </Text>
+    </p>
   )
 }
 

@@ -3,7 +3,6 @@ import Modal from "../Modal/Modal"
 import TxHash from "./TxHash"
 import { Column } from "../Layout"
 import SuccessIcon from "../SuccessIcon/SuccessIcon"
-import { Text } from "../Text"
 import TransactionTypeMessages, { TxType } from "../../utils/txModalMessages"
 
 interface Props {
@@ -23,11 +22,11 @@ const SuccessTx: React.FC<Props> = ({ type, hash }) => {
     <Modal closeable>
       <Column spacing="m" alignment="center">
         <SuccessIcon />
-        <Text strong size="large">
-          {TransactionTypeMessages[type].SUCCESS.title}
-        </Text>
+        <p className="text-4xl text-center text-white font-bold">{TransactionTypeMessages[type].SUCCESS.title}</p>
         {TransactionTypeMessages[type].SUCCESS.messages.map((message, index) => (
-          <Text key={index}>{message}</Text>
+          <p key={index} className="text-white text-center">
+            {message}
+          </p>
         ))}
         {hash && <TxHash hash={hash} />}
       </Column>

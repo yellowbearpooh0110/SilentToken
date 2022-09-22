@@ -72,7 +72,7 @@ const WalletProviderModal: React.FC<Props> = ({ onClose }) => {
         </Row>
         <Row>
           <Column grow={1}>
-            <hr className={styles.divider} />
+            <hr className="text-white" />
           </Column>
         </Row>
         <Row>
