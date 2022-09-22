@@ -15,7 +15,7 @@ type Props = Omit<InputProps, "onChange"> & {
   setValue: React.Dispatch<React.SetStateAction<string | undefined>>
 }
 
-const TokenInput: React.FC<Props> = ({ value, balance, decimals, setValue, ...props }) => {
+const TokenInput: React.FC<Props> = ({ value, balance, decimals, setValue, token, ...props }) => {
   const { disabled } = props
 
   const handleSetMax = React.useCallback(() => {
@@ -26,12 +26,14 @@ const TokenInput: React.FC<Props> = ({ value, balance, decimals, setValue, ...pr
     <>
       <Row alignment={["space-between", "center"]} spacing="xl" className={cx({ [styles.disabled]: disabled })}>
         <Column grow={1}>
-          <Input
+          <input
             value={value || ""}
+            className="h-[50px] text-black p-[0px_10px] rounded-[10px] grow-[1] no-spin"
             onChange={(event) => {
               event.preventDefault()
               const numberVal = Math.floor(Number(event.target.value) * 100) / 100
-              if (!balance)
+              if (!isNaN(numberVal) && numberVal <= 0) setValue("")
+              else if (!balance)
                 setValue((prev) =>
                   isNaN(numberVal) ? prev : 9999999999 < numberVal ? "9999999999" : numberVal.toString()
                 )
@@ -42,21 +44,22 @@ const TokenInput: React.FC<Props> = ({ value, balance, decimals, setValue, ...pr
                 )
               }
             }}
+            type="number"
             {...props}
           />
         </Column>
         <Column grow={0}>
           <Text size="extra-large" strong>
-            {props.token}
+            {token}
           </Text>
         </Column>
       </Row>
       {balance && !disabled && (
         <Row alignment={["end", "center"]} spacing="m">
           <Text className={styles.balance}>Balance: {formatAmount(utils.formatUnits(balance, decimals))}</Text>
-          <Button variant="primary" size="small" onClick={handleSetMax}>
+          <button className="bg-[#add8e6] text-black rounded-[7px] p-[3px_10px]" onClick={handleSetMax}>
             MAX
-          </Button>
+          </button>
         </Row>
       )}
     </>

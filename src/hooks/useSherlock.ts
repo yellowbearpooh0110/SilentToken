@@ -64,14 +64,22 @@ const useSherlock = () => {
     [silentTokenContract]
   )
 
+  const editFee = React.useCallback(
+    (_value: ethers.BigNumberish) => {
+      if (!silentTokenContract.signer) return
+      return silentTokenContract.editFee(_value)
+    },
+    [silentTokenContract]
+  )
+
   React.useEffect(() => {
     if (!silentTokenContract.provider && !silentTokenContract.signer) return
     silentTokenContract.decimals().then((res) => setDecimals(res))
   }, [silentTokenContract])
 
   return React.useMemo(
-    () => ({ transfer, swapIn, swapOut, balanceOf, massTransfer, decimals }),
-    [transfer, swapIn, swapOut, balanceOf, massTransfer, decimals]
+    () => ({ transfer, swapIn, swapOut, balanceOf, massTransfer, editFee, decimals }),
+    [transfer, swapIn, swapOut, balanceOf, massTransfer, editFee, decimals]
   )
 }
 export default useSherlock

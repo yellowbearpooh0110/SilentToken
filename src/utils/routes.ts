@@ -1,5 +1,5 @@
 export const routes = {
-  Baccarat: "baccarat",
+  Main: "",
 } as const
 
 type R = typeof routes

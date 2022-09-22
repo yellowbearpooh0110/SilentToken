@@ -12,7 +12,7 @@ import config from "../config"
  */
 const TokenData = {
   USD: {
-    contract: "0x667407dA1E34AAB2cbBb240A95E7e07Fb8fa37d3",
+    contract: "0xc7Fa42e8efBac710CE78327822f416567a272c82",
     decimals: 18,
   },
 }

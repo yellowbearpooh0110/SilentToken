@@ -30,18 +30,9 @@ type HeaderProps = {
  * Header component including the navigation and the wallet connection.
  */
 export const Header: React.FC<HeaderProps> = ({ navigationLinks = [], logoOnly = false }) => {
-  const location = useLocation()
-
-  const homeRoute = location.pathname.startsWith("/protocols") ? "/protocols" : "/"
-
   return (
     <div className={styles.container}>
-      <div className={styles.leftArea}>
-        <Link to={homeRoute}>
-          <Logotype height={60} width={60} />
-        </Link>
-      </div>
-      {!logoOnly && (
+      {/* {!logoOnly && (
         <div className={styles.centerArea}>
           <Row alignment={["center", "center"]}>
             {navigationLinks.map((navLink) => (
@@ -52,7 +43,7 @@ export const Header: React.FC<HeaderProps> = ({ navigationLinks = [], logoOnly =
             ))}
           </Row>
         </div>
-      )}
+      )} */}
       {!logoOnly && (
         <div className={styles.rightArea}>
           <Row alignment="end" grow={0}>

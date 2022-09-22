@@ -4,8 +4,9 @@
   position: relative;
   width: 100%;
   height: 3.315rem;
-  background-color: $primary-green;
+  background-color: #fff;
   & .placeholder {
+    color: grey;
     position: absolute;
     user-select: none;
     top: 50%;
@@ -27,7 +28,7 @@
   font-weight: 700;
   line-height: 2.25rem;
   padding: 0 0.5rem;
-  color: #fff;
+  color: #000;
   z-index: 1;
   position: relative;
 }
