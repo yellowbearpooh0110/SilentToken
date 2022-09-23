@@ -230,7 +230,7 @@ export const MainPage: React.FC = () => {
             {allowance.gt(
               ethers.BigNumber.from(swapOutAmountNumber * 100).mul(ethers.BigNumber.from(10).pow(decimals - 2))
             )
-              ? "Swap In"
+              ? "Swap Out"
               : "Approve"}
           </button>
           <hr />
