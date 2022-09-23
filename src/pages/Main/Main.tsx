@@ -57,7 +57,7 @@ export const MainPage: React.FC = () => {
 
   return (
     <>
-      <h1 className="text-6xl text-center mb-8 font-Kaisar-Black">Spagetti Cash</h1>
+      <h1 className="text-6xl text-center mb-8 font-Kaisar-Black">Spaghetti Cash</h1>
       <h2 className="text-2xl text-center mb-8">
         A non-custodial privacy solution based on{" "}
         <span className="bg-white text-blue-400 px-3 py-2 rounded-lg font-bold">Fantom</span>
