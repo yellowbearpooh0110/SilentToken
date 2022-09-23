@@ -12,6 +12,9 @@ module.exports = {
           "50%": { backgroundPosition: "100% 50%" },
         },
       },
+      fontFamily: {
+        "Kaisar-Black": ["Kaisar Black"],
+      },
     },
   },
   plugins: [

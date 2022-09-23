@@ -1,9 +1,7 @@
 import React from "react"
 import { shortenAddress } from "../../utils/format"
-import styles from "./TxStateModals.module.scss"
 import { FiExternalLink } from "react-icons/fi"
 import { getTxUrl } from "../../utils/explorer"
-import { Text } from "../Text"
 
 interface Props {
   /**
@@ -14,7 +12,7 @@ interface Props {
 
 const TxHash: React.FC<Props> = ({ hash }) => {
   return (
-    <p className="text-sm">
+    <p className="text-sm text-white">
       Transaction hash:{" "}
       <a href={getTxUrl(hash)} target="_blank" rel="noreferrer" className="hover:text-green-300 transition-all">
         {shortenAddress(hash)} <FiExternalLink className="inline" />

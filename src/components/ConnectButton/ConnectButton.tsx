@@ -38,36 +38,25 @@ const ConnectButton: React.FC<PropsWithChildren<unknown>> = ({ children }) => {
     setIsModalVisible(!isModalVisible)
   }, [isModalVisible])
 
-  // Check if any wallet is connected
-  if (!accountData.isConnected) {
-    return (
-      <>
-        <button
-          className="bg-[#add8e6] hover:bg-[#729eaf] border text-black my-[10px] min-w-[120px] rounded-[7px] h-[50px] disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed transition-all"
-          onClick={handleToggleConnectionModal}
-        >
-          Connect
-        </button>
-        {isModalVisible && <WalletProviderModal onClose={handleToggleConnectionModal} />}
-      </>
-    )
-  }
-
   // Check if correct network is selected
   const isCorrectNetwork = chain?.id === config.networkId
-  if (!isCorrectNetwork) {
-    return (
-      <button
-        className="bg-[#add8e6] hover:bg-[#729eaf] border text-black my-[10px] min-w-[120px] rounded-[7px] h-[50px] disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed transition-all"
-        onClick={handleSwitchToCorrectNetwork}
-      >
-        Switch network
-      </button>
-    )
-  }
   return (
-    <button className="bg-[#add8e6] hover:bg-[#729eaf] border text-black my-[10px] min-w-[120px] rounded-[7px] h-[50px] disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed transition-all">
-      {shortenAddress(accountData.address)}
+    <button
+      className="bg-[#1976d2] hover:bg-[#1565c0] shadow-[rgb(0_0_0_/_20%)_0px_3px_1px_-2px,_rgb(0_0_0_/_14%)_0px_2px_2px_0px,_rgb(0_0_0_/_12%)_0px_1px_5px_0px] hover:shadow-[rgb(0_0_0_/_20%)_0px_2px_4px_-1px,_rgb(0_0_0_/_14%)_0px_4px_5px_0px,_rgb(0_0_0_/_12%)_0px_1px_10px_0px] text-white px-[10px] min-w-[120px] rounded-[4px] h-[40px] disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed transition-all font-semibold"
+      onClick={
+        accountData.isConnected
+          ? isCorrectNetwork
+            ? undefined
+            : handleSwitchToCorrectNetwork
+          : handleToggleConnectionModal
+      }
+    >
+      {accountData.isConnected
+        ? isCorrectNetwork
+          ? shortenAddress(accountData.address)
+          : "Switch network"
+        : "Connect"}
+      {!accountData.isConnected && isModalVisible && <WalletProviderModal onClose={handleToggleConnectionModal} />}
     </button>
   )
 }

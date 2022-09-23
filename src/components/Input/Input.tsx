@@ -1,9 +1,9 @@
-import React from "react"
+import * as React from "react"
 import { AvailableERC20Tokens } from "../../hooks/useERC20"
 
 import styles from "./Input.module.scss"
 
-export type InputProps = {
+export interface InputProps {
   /**
    * onChange event handler
    */
@@ -28,13 +28,22 @@ export type InputProps = {
    * Disable input
    */
   disabled?: boolean
+
+  readOnly?: boolean
 }
 
-export const Input: React.FC<InputProps> = ({ onChange, placeholder, value, disabled = false }) => {
+export const Input: React.FC<InputProps> = ({ onChange, placeholder, value, disabled = false, readOnly }) => {
   return (
     <div className={styles.inputContainer}>
       {(value === "" || value === "0") && <span className={styles.placeholder}>{placeholder}</span>}
-      <input className={styles.input} value={value} onChange={onChange} disabled={disabled} type="number" />
+      <input
+        className={styles.input}
+        value={value}
+        onChange={onChange}
+        disabled={disabled}
+        type="number"
+        readOnly={readOnly}
+      />
     </div>
   )
 }

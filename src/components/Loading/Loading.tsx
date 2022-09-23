@@ -1,6 +1,5 @@
 import React from "react"
 import { Column } from "../Layout"
-import { Text } from "../Text"
 
 type LoadingVariant = "Scan" | "Layer"
 
@@ -37,7 +36,7 @@ const Loading: React.FC<Props> = ({ label, variant = "Scan", size = 120 }) => {
             fill="none"
             viewBox="0 0 24 24"
           >
-            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
             <path
               className="opacity-75"
               fill="currentColor"
@@ -51,9 +50,9 @@ const Loading: React.FC<Props> = ({ label, variant = "Scan", size = 120 }) => {
             <svg
               className="w-6 h-6 text-violet-500"
               fill="none"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
               viewBox="0 0 24 24"
               stroke="currentColor"
             >

@@ -15,6 +15,10 @@ const TokenData = {
     contract: "0xc7Fa42e8efBac710CE78327822f416567a272c82",
     decimals: 18,
   },
+  WFTM: {
+    contract: "0xc7Fa42e8efBac710CE78327822f416567a272c82",
+    decimals: 18,
+  },
 }
 
 export type AvailableERC20Tokens = keyof typeof TokenData
