@@ -78,31 +78,31 @@ const TransactionTypeMessages: TxTypeMessages = {
   [TxType.SWAPIN]: {
     [TxState.PENDING]: {
       title: "Transaction approved and pending",
-      messages: ["Waiting for the stake transaction (2/2) to make its way onto the blockchain."],
+      messages: ["Waiting for the swapin transaction (2/2) to make its way onto the blockchain."],
     },
     [TxState.SUCCESS]: {
       title: "Transaction was successful!",
-      messages: ["Success!! Stake transaction (2/2) is completed."],
+      messages: ["Success!! SwapIn transaction (2/2) is completed."],
     },
   },
   [TxType.SWAPOUT]: {
     [TxState.PENDING]: {
       title: "Transaction approved and pending",
-      messages: ["Waiting for the stake transaction (2/2) to make its way onto the blockchain."],
+      messages: ["Waiting for the swapout transaction (2/2) to make its way onto the blockchain."],
     },
     [TxState.SUCCESS]: {
       title: "Transaction was successful!",
-      messages: ["Success!! Stake transaction (2/2) is completed."],
+      messages: ["Success!! SwapOut transaction (2/2) is completed."],
     },
   },
   [TxType.TRANSFER]: {
     [TxState.PENDING]: {
       title: "Transaction approved and pending",
-      messages: ["Waiting for the stake transaction (2/2) to make its way onto the blockchain."],
+      messages: ["Waiting for the transfer transaction (2/2) to make its way onto the blockchain."],
     },
     [TxState.SUCCESS]: {
       title: "Transaction was successful!",
-      messages: ["Success!! Stake transaction (2/2) is completed."],
+      messages: ["Success!! Transfer transaction (2/2) is completed."],
     },
   },
 }
