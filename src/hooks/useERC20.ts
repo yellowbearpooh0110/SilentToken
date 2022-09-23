@@ -36,7 +36,6 @@ const useERC20 = (token: AvailableERC20Tokens) => {
 
   const [decimals, setDecimals] = React.useState<number>(18)
   const [balance, setBalance] = React.useState<BigNumber>()
-  const [allowances, setAllowances] = React.useState<{ [key: string]: BigNumber }>({})
 
   const provider = useProvider({ chainId: config.networkId })
   const { data: signerData } = useSigner()
@@ -77,18 +76,12 @@ const useERC20 = (token: AvailableERC20Tokens) => {
    * Fetch the allowance amount for a given spender
    */
   const getAllowance = React.useCallback(
-    async (address: string, invalidateCache?: boolean) => {
-      if (!accountData?.address || !address) return
-      if (!contract.provider && !contract.signer) return
-
-      if (!invalidateCache && allowances[address]) return allowances[address]
-
-      const lastAllowance = await contract.allowance(accountData?.address, address)
-      setAllowances({ ...allowances, [address]: lastAllowance })
-
-      return lastAllowance
+    async (address: string) => {
+      if (!contract.signer || !address) return
+      const signerAddress = await contract.signer.getAddress()
+      return await contract.allowance(signerAddress, address)
     },
-    [contract, accountData?.address, allowances]
+    [contract]
   )
 
   /**
@@ -96,9 +89,7 @@ const useERC20 = (token: AvailableERC20Tokens) => {
    */
   const approve = React.useCallback(
     (address: string, amount: BigNumber) => {
-      if (!address || !amount) {
-        return
-      }
+      if (!address || !amount) return
       return contract.approve(address, amount)
     },
     [contract]
@@ -121,11 +112,6 @@ const useERC20 = (token: AvailableERC20Tokens) => {
     if (!accountData?.address) return
     refreshBalance()
   }, [accountData?.address, refreshBalance])
-
-  React.useEffect(() => {
-    if (!accountData?.address) return
-    setAllowances({})
-  }, [accountData?.address])
 
   return React.useMemo(
     () => ({ balance, refreshBalance, getBalanceOf, getAllowance, approve, decimals, format }),

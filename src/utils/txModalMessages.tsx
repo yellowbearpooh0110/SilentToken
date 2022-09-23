@@ -5,11 +5,9 @@
 export enum TxType {
   GENERIC = "GENERIC",
   APPROVE = "APPROVE",
-  EXECUTE = "EXECUTE",
-  STAKE = "STAKE",
-  UNSTAKE = "UNSTAKE",
-  CLAIM_REWARDS = "CLAIM_REWARDS",
-  ADD_PROTOCOL_BALANCE = "ADD_PROTOCOL_BALANCE",
+  SWAPIN = "SWAPIN",
+  SWAPOUT = "SWAPOUT",
+  TRANSFER = "TRANSFER",
 }
 
 /**
@@ -77,54 +75,34 @@ const TransactionTypeMessages: TxTypeMessages = {
       ],
     },
   },
-  [TxType.EXECUTE]: {
-    [TxState.PENDING]: {
-      title: "Transaction approved and pending",
-      messages: ["Waiting for the execute transaction (2/2) to make its way onto the blockchain."],
-    },
-    [TxState.SUCCESS]: {
-      title: "Transaction was successful!",
-      messages: ["Success!! Execute transaction (2/2) is completed. Look into your wallet for the receipt NFT."],
-    },
-  },
-  [TxType.STAKE]: {
+  [TxType.SWAPIN]: {
     [TxState.PENDING]: {
       title: "Transaction approved and pending",
       messages: ["Waiting for the stake transaction (2/2) to make its way onto the blockchain."],
     },
     [TxState.SUCCESS]: {
       title: "Transaction was successful!",
-      messages: ["Success!! Stake transaction (2/2) is completed. Look into your wallet for the receipt NFT."],
+      messages: ["Success!! Stake transaction (2/2) is completed."],
     },
   },
-  [TxType.UNSTAKE]: {
+  [TxType.SWAPOUT]: {
     [TxState.PENDING]: {
       title: "Transaction approved and pending",
       messages: ["Waiting for the stake transaction (2/2) to make its way onto the blockchain."],
     },
     [TxState.SUCCESS]: {
       title: "Transaction was successful!",
-      messages: ["Success!! Stake transaction (2/2) is completed. Look into your wallet for the receipt NFT."],
+      messages: ["Success!! Stake transaction (2/2) is completed."],
     },
   },
-  [TxType.CLAIM_REWARDS]: {
+  [TxType.TRANSFER]: {
     [TxState.PENDING]: {
       title: "Transaction approved and pending",
       messages: ["Waiting for the stake transaction (2/2) to make its way onto the blockchain."],
     },
     [TxState.SUCCESS]: {
       title: "Transaction was successful!",
-      messages: ["Success!! Stake transaction (2/2) is completed. Look into your wallet for the receipt NFT."],
-    },
-  },
-  [TxType.ADD_PROTOCOL_BALANCE]: {
-    [TxState.PENDING]: {
-      title: "Transaction approved and pending",
-      messages: ["Waiting for the add balance transaction (2/2) to make its way onto the blockchain."],
-    },
-    [TxState.SUCCESS]: {
-      title: "Transaction was successful!",
-      messages: ["Success!! Add balance transaction (2/2) is completed. Protocol's balance will update shortly."],
+      messages: ["Success!! Stake transaction (2/2) is completed."],
     },
   },
 }

@@ -125,7 +125,7 @@ export const MainPage: React.FC = () => {
                       ethers.BigNumber.from(swapInAmountNumber * 100).mul(ethers.BigNumber.from(10).pow(decimals - 2))
                     )) as ethers.ContractTransaction,
                   {
-                    transactionType: TxType.STAKE,
+                    transactionType: TxType.SWAPIN,
                   }
                 )
               else
@@ -136,7 +136,7 @@ export const MainPage: React.FC = () => {
                       ethers.BigNumber.from(2).pow(ethers.BigNumber.from(256)).sub(1)
                     )) as ethers.ContractTransaction,
                   {
-                    transactionType: TxType.STAKE,
+                    transactionType: TxType.APPROVE,
                   }
                 )
               setRefreshFlag((_prev) => !_prev)
@@ -210,7 +210,7 @@ export const MainPage: React.FC = () => {
                       ethers.BigNumber.from(swapOutAmountNumber * 100).mul(ethers.BigNumber.from(10).pow(decimals - 2))
                     )) as ethers.ContractTransaction,
                   {
-                    transactionType: TxType.STAKE,
+                    transactionType: TxType.SWAPOUT,
                   }
                 )
               else
@@ -221,7 +221,7 @@ export const MainPage: React.FC = () => {
                       ethers.BigNumber.from(2).pow(ethers.BigNumber.from(256)).sub(1)
                     )) as ethers.ContractTransaction,
                   {
-                    transactionType: TxType.STAKE,
+                    transactionType: TxType.APPROVE,
                   }
                 )
               setRefreshFlag((_prev) => !_prev)
@@ -313,7 +313,7 @@ export const MainPage: React.FC = () => {
                       ethers.BigNumber.from(tokenAmountNumber * 100).mul(ethers.BigNumber.from(10).pow(decimals - 2))
                     )) as ethers.ContractTransaction,
                   {
-                    transactionType: TxType.STAKE,
+                    transactionType: TxType.TRANSFER,
                   }
                 )
               else
@@ -324,7 +324,7 @@ export const MainPage: React.FC = () => {
                       ethers.BigNumber.from(2).pow(ethers.BigNumber.from(256)).sub(1)
                     )) as ethers.ContractTransaction,
                   {
-                    transactionType: TxType.STAKE,
+                    transactionType: TxType.APPROVE,
                   }
                 )
               setRefreshFlag((_prev) => !_prev)
