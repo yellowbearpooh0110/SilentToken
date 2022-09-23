@@ -42,9 +42,14 @@ export const Header: React.FC<HeaderProps> = ({ navigationLinks = [], logoOnly =
       {!logoOnly && (
         <div className={styles.rightArea}>
           <Row alignment="end" grow={0}>
-            <button className="bg-[#1976d2] hover:bg-[#1565c0] shadow-[rgb(0_0_0_/_20%)_0px_3px_1px_-2px,_rgb(0_0_0_/_14%)_0px_2px_2px_0px,_rgb(0_0_0_/_12%)_0px_1px_5px_0px] hover:shadow-[rgb(0_0_0_/_20%)_0px_2px_4px_-1px,_rgb(0_0_0_/_14%)_0px_4px_5px_0px,_rgb(0_0_0_/_12%)_0px_1px_10px_0px] text-white mr-[10px] px-[10px] min-w-[120px] rounded-[4px] h-[40px] disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed transition-all font-semibold">
+            <a
+              href="https://docs.spaghetti.cash/"
+              target="_blank"
+              rel="noreferrer"
+              className="bg-[#1976d2] hover:bg-[#1565c0] shadow-[rgb(0_0_0_/_20%)_0px_3px_1px_-2px,_rgb(0_0_0_/_14%)_0px_2px_2px_0px,_rgb(0_0_0_/_12%)_0px_1px_5px_0px] hover:shadow-[rgb(0_0_0_/_20%)_0px_2px_4px_-1px,_rgb(0_0_0_/_14%)_0px_4px_5px_0px,_rgb(0_0_0_/_12%)_0px_1px_10px_0px] text-white mr-[10px] px-[10px] min-w-[120px] rounded-[4px] h-[40px] flex items-center justify-center disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed transition-all font-semibold"
+            >
               How to
-            </button>
+            </a>
             <ConnectButton />
           </Row>
         </div>
