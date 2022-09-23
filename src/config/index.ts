@@ -2,8 +2,10 @@ import { Config } from "./ConfigType"
 
 // const networkId = 250
 const config: Config = {
-  networkId: 4,
-  silentTokenAddress: "0xC4A3912e9098cb7bDf54bb1579F9E77274EF337A",
+  // networkId: 4,
+  networkId: 250,
+  // silentTokenAddress: "0xC4A3912e9098cb7bDf54bb1579F9E77274EF337A",
+  silentTokenAddress: "0x7146014D9a41DB17552928a5F74531C873309E29",
   massTransfer: [
     "0x3d0ade8b4146e0438f7f872d4b8c4155bfac5b56",
     "0x7e74d1beca737a4a6fae4190c258e087ad3f3130",

@@ -16,6 +16,9 @@ export const getTxUrl = (hash: string) => {
     case 5:
       // Goerli
       return `https://goerli.etherscan.io/tx/${hash}`
+    case 250:
+      // Goerli
+      return `https://ftmscan.io/tx/${hash}`
     default:
       return undefined
   }

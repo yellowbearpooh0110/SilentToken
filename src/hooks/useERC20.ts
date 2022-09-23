@@ -12,11 +12,11 @@ import config from "../config"
  */
 const TokenData = {
   USD: {
-    contract: "0xc7Fa42e8efBac710CE78327822f416567a272c82",
+    contract: "0xAd84341756Bf337f5a0164515b1f6F993D194E1f",
     decimals: 18,
   },
   WFTM: {
-    contract: "0xc7Fa42e8efBac710CE78327822f416567a272c82",
+    contract: "0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83",
     decimals: 18,
   },
 }
