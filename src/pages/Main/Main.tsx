@@ -101,7 +101,7 @@ export const MainPage: React.FC = () => {
             </div>
           </div>
           <button
-            className="bg-[#add8e6] block border text-black my-[10px] w-full rounded-[7px] h-[50px] disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed transition-all"
+            className="bg-[#1976d2] hover:bg-[#1565c0] shadow-[rgb(0_0_0_/_20%)_0px_3px_1px_-2px,_rgb(0_0_0_/_14%)_0px_2px_2px_0px,_rgb(0_0_0_/_12%)_0px_1px_5px_0px] hover:shadow-[rgb(0_0_0_/_20%)_0px_2px_4px_-1px,_rgb(0_0_0_/_14%)_0px_4px_5px_0px,_rgb(0_0_0_/_12%)_0px_1px_10px_0px] text-white px-[10px] font-bold min-w-[120px] block my-[10px] w-full rounded-[7px] h-[50px] disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed transition-all"
             disabled={swapInAmountNumber <= 0 || !accountData.isConnected}
             onClick={async (event) => {
               event.preventDefault()
@@ -165,7 +165,7 @@ export const MainPage: React.FC = () => {
             </div>
           </div>
           <button
-            className="bg-[#add8e6] block border text-black my-[10px] w-full rounded-[7px] h-[50px] disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed transition-all"
+            className="bg-[#1976d2] hover:bg-[#1565c0] shadow-[rgb(0_0_0_/_20%)_0px_3px_1px_-2px,_rgb(0_0_0_/_14%)_0px_2px_2px_0px,_rgb(0_0_0_/_12%)_0px_1px_5px_0px] hover:shadow-[rgb(0_0_0_/_20%)_0px_2px_4px_-1px,_rgb(0_0_0_/_14%)_0px_4px_5px_0px,_rgb(0_0_0_/_12%)_0px_1px_10px_0px] text-white px-[10px] font-bold min-w-[120px] block my-[10px] w-full rounded-[7px] h-[50px] disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed transition-all"
             disabled={swapOutAmountNumber <= 0 || !accountData.isConnected}
             onClick={async (event) => {
               event.preventDefault()
@@ -185,7 +185,7 @@ export const MainPage: React.FC = () => {
           <hr />
           <h2 className="text-2xl font-bold my-4">Transfer &rarr;</h2>
           <p className="text-[15px] font-[Menlo,_Monaco,_'Lucida_Console',_'Liberation_Mono',_'DejaVu_Sans_Mono',_'Bitstream_Vera_Sans_Mono',_'Courier_New',_monospace]">
-            Make sure to remember the amount you swapped
+            Make sure to remember the amount you transferred
           </p>
           <div className="flex my-[20px] text-[16px] items-center">
             <p className="mr-1">Address:</p>
@@ -244,7 +244,7 @@ export const MainPage: React.FC = () => {
             </div>
           </div>
           <AllowanceGate
-            className="bg-[#add8e6] block border text-black my-[10px] w-full rounded-[7px] h-[50px] disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed transition-all"
+            className="bg-[#1976d2] hover:bg-[#1565c0] shadow-[rgb(0_0_0_/_20%)_0px_3px_1px_-2px,_rgb(0_0_0_/_14%)_0px_2px_2px_0px,_rgb(0_0_0_/_12%)_0px_1px_5px_0px] hover:shadow-[rgb(0_0_0_/_20%)_0px_2px_4px_-1px,_rgb(0_0_0_/_14%)_0px_4px_5px_0px,_rgb(0_0_0_/_12%)_0px_1px_10px_0px] text-white px-[10px] font-bold min-w-[120px] block my-[10px] w-full rounded-[7px] h-[50px] disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed transition-all"
             disabled={
               tokenAmountNumber <= 0 || !new RegExp(/^0x[a-fA-F0-9]{40}$/).test(toAddress) || !accountData.isConnected
             }
@@ -272,7 +272,7 @@ export const MainPage: React.FC = () => {
             Make sure to remember the amount you swapped
           </p>
           <button
-            className="bg-[#add8e6] block border text-black my-[10px] w-full rounded-[7px] h-[50px] disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed transition-all"
+            className="bg-[#1976d2] hover:bg-[#1565c0] shadow-[rgb(0_0_0_/_20%)_0px_3px_1px_-2px,_rgb(0_0_0_/_14%)_0px_2px_2px_0px,_rgb(0_0_0_/_12%)_0px_1px_5px_0px] hover:shadow-[rgb(0_0_0_/_20%)_0px_2px_4px_-1px,_rgb(0_0_0_/_14%)_0px_4px_5px_0px,_rgb(0_0_0_/_12%)_0px_1px_10px_0px] text-white px-[10px] font-bold min-w-[120px] block my-[10px] w-full rounded-[7px] h-[50px] disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed transition-all"
             disabled={!accountData.isConnected}
             onClick={async (event) => {
               event.preventDefault()
@@ -289,7 +289,7 @@ export const MainPage: React.FC = () => {
             Make sure to remember the amount you swapped
           </p>
           <button
-            className="bg-[#add8e6] block border text-black my-[10px] w-full rounded-[7px] h-[50px] disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed transition-all"
+            className="bg-[#1976d2] hover:bg-[#1565c0] shadow-[rgb(0_0_0_/_20%)_0px_3px_1px_-2px,_rgb(0_0_0_/_14%)_0px_2px_2px_0px,_rgb(0_0_0_/_12%)_0px_1px_5px_0px] hover:shadow-[rgb(0_0_0_/_20%)_0px_2px_4px_-1px,_rgb(0_0_0_/_14%)_0px_4px_5px_0px,_rgb(0_0_0_/_12%)_0px_1px_10px_0px] text-white px-[10px] font-bold min-w-[120px] block my-[10px] w-full rounded-[7px] h-[50px] disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed transition-all"
             disabled={!accountData.isConnected}
             onClick={async (event) => {
               event.preventDefault()
